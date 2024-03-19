@@ -1,0 +1,25 @@
+﻿Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Hook 50501 SFDC Active Jobs Remove Jobs Pre hook
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!con.OpenRecordsetRW("rst","select * from GAB_6943_SFDC_DELJOB")
+F.ODBC.con!rst.AddNew
+F.ODBC.con!rst.Set!EMPLOYEEID(V.Passed.Employee)
+F.ODBC.con!rst.Set!JOBSUFFIX(V.Passed.Job)
+F.ODBC.con!rst.Set!SEQ(V.Passed.Sequence)
+F.ODBC.con!rst.Set!DDATE(V.Ambient.Date.PervasiveDate)
+F.ODBC.con!rst.Set!DTIME(V.Ambient.Time)
+F.ODBC.con!rst.Update
+F.ODBC.con!rst.Close
+F.ODBC.Connection!con.close
+
+Program.Sub.Main.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8315.16327$}$1
+${$6$}$rrodriguez$}$20221019141904074$}$YnvOFTUOxTrnxbSzMvfBmnrP7dtKqN6ZKEdpzIv886rDg/XVMrOuFQSgfu8AZw3sm7flG/1L0pgNZs/UGmkt9w==
+Program.Sub.Comments.End
